@@ -1,7 +1,6 @@
 package com.hygge.danskordbog
 
 import androidx.lifecycle.*
-import com.hygge.ordbog_interface.Word
 import kotlinx.coroutines.launch
 
 class WordViewModel(private val repository: WordRepository) : ViewModel() {

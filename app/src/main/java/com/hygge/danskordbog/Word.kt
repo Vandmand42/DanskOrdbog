@@ -1,4 +1,4 @@
-package com.hygge.ordbog_interface
+package com.hygge.danskordbog
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
