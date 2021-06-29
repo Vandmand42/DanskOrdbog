@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.hygge.ordbog_interface.Word
 
 class MainActivity : AppCompatActivity() {
 

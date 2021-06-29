@@ -1,4 +1,4 @@
-package com.hygge.ordbog_interface
+package com.hygge.danskordbog
 
 import androidx.room.Dao
 import androidx.room.Query
@@ -16,4 +16,10 @@ interface WordDao {
 
     @Query("DELETE FROM word_table")
     suspend fun deleteAll()
+}
+
+@Dao
+interface DictionaryDao {
+    @Query("SELECT * FROM danish_table ORDER BY danish ASC")
+    fun getDanishVocabulary(): Flow<List<Danish>>
 }

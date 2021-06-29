@@ -1,8 +1,6 @@
 package com.hygge.danskordbog
 
 import androidx.annotation.WorkerThread
-import com.hygge.ordbog_interface.Word
-import com.hygge.ordbog_interface.WordDao
 import kotlinx.coroutines.flow.Flow
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO
