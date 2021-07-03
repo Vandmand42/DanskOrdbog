@@ -9,30 +9,31 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.hygge.danskordbog.db.*
 
 class MainActivity : AppCompatActivity() {
 
     private val newWordActivityRequestCode = 1
-    private val wordViewModel: WordViewModel by viewModels {
-        WordViewModelFactory((application as WordsApplication).repository)
+    private val wordViewModel: DictionaryViewModel by viewModels {
+        WordViewModelFactory((application as DictionaryApplication).repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = WordListAdapter()
+        val adapter = DictionaryListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        wordViewModel.allWords.observe(this) { words ->
+        wordViewModel.danishWord.observe(this) { words ->
             // Update the cached copy of the words in the adapter.
-            words?.let { adapter.submitList(it) }
+            words?.let { it }
         }
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, NewWordActivity::class.java)
+            val intent = Intent(this@MainActivity, DisplayVocabularyActivity::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
         }
     }
@@ -40,10 +41,17 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, intentData)
 
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            intentData?.getStringExtra(NewWordActivity.EXTRA_REPLY)?.let { reply ->
-                val word = Word(reply)
-                wordViewModel.insert(word)
+            var firstWord = intentData?.getStringExtra(DisplayVocabularyActivity.EXTRA_REPLY)
+            var secondWord = intentData?.getStringExtra(DisplayVocabularyActivity.Super_Reply)
+
+
+
+            if (firstWord != null && secondWord != null) {
+
+            val word = Dictionary(firstWord, secondWord)
+                wordViewModel.insertVocabulary(word)
             }
+
         } else {
             Toast.makeText(
                 applicationContext,

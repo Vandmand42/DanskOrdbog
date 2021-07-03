@@ -1,4 +1,4 @@
-package com.hygge.danskordbog
+package com.hygge.danskordbog.db
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hygge.danskordbog.R
 
-class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordsComparator()) {
+class DictionaryListAdapter : ListAdapter<Dictionary, DictionaryListAdapter.WordViewHolder>(WordsComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
         return WordViewHolder.create(parent)
@@ -16,7 +17,7 @@ class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordsC
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current.word)
+        holder.bind(current.danish)
     }
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,13 +36,13 @@ class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordsC
         }
     }
 
-    class WordsComparator : DiffUtil.ItemCallback<Word>() {
-        override fun areItemsTheSame(oldItem: Word, newItem: Word): Boolean {
+    class WordsComparator : DiffUtil.ItemCallback<Dictionary>() {
+        override fun areItemsTheSame(oldItem: Dictionary, newItem: Dictionary): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
-            return oldItem.word == newItem.word
+        override fun areContentsTheSame(oldItem: Dictionary, newItem: Dictionary): Boolean {
+            return oldItem.danish == newItem.danish
         }
     }
 }

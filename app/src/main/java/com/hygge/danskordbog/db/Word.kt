@@ -1,4 +1,4 @@
-package com.hygge.danskordbog
+package com.hygge.danskordbog.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

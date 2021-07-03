@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">DanskOrdbog</string>
-    <string name="hint_word">Word...</string>
+    <string name="hint_word1">Dansk...</string>
+    <string name="hint_word2">Engelsk...</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
     <string name="add_word">Add word</string>
