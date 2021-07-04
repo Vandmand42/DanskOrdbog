@@ -1,13 +1,16 @@
 package com.hygge.danskordbog
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ebner.roomdatabasebackup.core.RoomBackup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hygge.danskordbog.db.*
 
@@ -35,6 +38,21 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             val intent = Intent(this@MainActivity, DisplayVocabularyActivity::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
+        }
+
+        val btnBackup = findViewById<FloatingActionButton>(R.id.btn_backup)
+        btnBackup.setOnClickListener {
+            RoomBackup()
+                .context(this)
+                .useExternalStorage(true)
+                .database(DictionaryDatabase.getInstance(this))
+                .apply {
+                    onCompleteListener{success, message ->
+                        Log.d(TAG, "success: $success, message: $message")
+                        if (success) restartApp(Intent(this@MainActivity, MainActivity::class.java))
+                    }
+                }
+                .backup()
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {

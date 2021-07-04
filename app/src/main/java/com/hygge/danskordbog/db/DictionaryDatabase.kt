@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.concurrent.Executors
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = [Dictionary::class], version = 2, exportSchema = false)
-abstract class DictionaryDatabase : RoomDatabase(){
+@Database(entities = [Dictionary::class], version = 1, exportSchema = true)
+abstract class DictionaryDatabase : RoomDatabase() {
 
     abstract fun dictionaryDao(): DictionaryDao
 
@@ -38,29 +39,55 @@ abstract class DictionaryDatabase : RoomDatabase(){
             dictionaryDao.insertVocabulary(vocabulary)
         }
     }
+
+
     companion object {
+
+        private const val DATABASE_NAME = "dictionary_database"
+
         // Singleton prevents multiple instances of database opening at the same time
         @Volatile
-        private var INSTANCE: DictionaryDatabase?= null
+        private var INSTANCE: DictionaryDatabase? = null
 
-        fun getDatabase(
-            context: Context,
-            scope:CoroutineScope
-        ): DictionaryDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    DictionaryDatabase::class.java,
-                    "dictionary_database"
-                ).addCallback(DictionaryDatabaseCallback(scope))
-                    .build()
-                INSTANCE = instance
-                // return instance
-                instance
+        fun getInstance(context: Context): DictionaryDatabase =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+            }
+
+        private fun buildDatabase(context: Context) =
+            Room.databaseBuilder(context.applicationContext, DictionaryDatabase::class.java, DATABASE_NAME)
+                .addCallback(object : Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        ioThread {
+                            getInstance(context).dictionaryDao().insertVocabulary((Dictionary("hej", "hi")))
+                        }
+                    }
+                })
+                .build()
+
+        private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
+
+        fun ioThread(f: () -> Unit) {
+            IO_EXECUTOR.execute(f)
+        }
+            fun getDatabase(
+                context: Context,
+                scope: CoroutineScope
+            ): DictionaryDatabase {
+                // if the INSTANCE is not null, then return it,
+                // if it is, then create the database
+                return INSTANCE ?: synchronized(this) {
+                    val instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        DictionaryDatabase::class.java,
+                        DATABASE_NAME
+                    ).addCallback(DictionaryDatabaseCallback(scope))
+                        .build()
+                    INSTANCE = instance
+                    // return instance
+                    instance
+                }
             }
         }
     }
-}
-
