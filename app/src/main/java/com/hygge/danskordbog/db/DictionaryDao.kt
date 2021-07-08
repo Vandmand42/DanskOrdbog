@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DictionaryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertVocabulary(dictionary: Dictionary)
+    suspend fun insertVocabulary(dictionary: Dictionary)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateVocabulary(dictionary: Dictionary)
@@ -18,6 +18,9 @@ interface DictionaryDao {
     @Query("SELECT * FROM dictionary_table WHERE vocab_id == danish")
     fun getVocabulary(): Flow<Dictionary>
 
-    @Query("SELECT DISTINCT danish FROM dictionary_table")
-    fun getDanish(): Flow<List<String>>
+    @Query("SELECT * FROM dictionary_table ORDER BY danish ASC")
+    fun getDanish(): Flow<List<Dictionary>>
+
+    @Query("SELECT * FROM dictionary_table ORDER BY english ASC")
+    fun getEnglish(): Flow<List<Dictionary>>
 }

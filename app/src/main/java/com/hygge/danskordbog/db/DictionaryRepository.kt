@@ -9,17 +9,18 @@ class DictionaryRepository(private val dictionaryDao: DictionaryDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
-    val danishWord: Flow<Dictionary> = dictionaryDao.getVocabulary()
+    val danishWord: Flow<List<Dictionary>> = dictionaryDao.getDanish()
+    val englishWord: Flow<List<Dictionary>> = dictionaryDao.getEnglish()
 
-    val allDanishWord: Flow<List<String>> = dictionaryDao.getDanish()
+//    val allDanishWord: Flow<List<String>> = dictionaryDao.getDanish()
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
     // off the main thread.
-//    @Suppress("RedundantSuspendModifier")
+    @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertVocabulary(danish: Dictionary) {
-        dictionaryDao.insertVocabulary(danish)
+    suspend fun insertVocabulary(dictionary: Dictionary) {
+        dictionaryDao.insertVocabulary(dictionary)
     }
 
 

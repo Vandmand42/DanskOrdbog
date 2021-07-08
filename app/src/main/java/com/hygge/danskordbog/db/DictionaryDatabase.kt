@@ -49,28 +49,28 @@ abstract class DictionaryDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: DictionaryDatabase? = null
 
-        fun getInstance(context: Context): DictionaryDatabase =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
-            }
+//        fun getInstance(context: Context): DictionaryDatabase =
+//            INSTANCE ?: synchronized(this) {
+//                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+//            }
 
-        private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext, DictionaryDatabase::class.java, DATABASE_NAME)
-                .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                        ioThread {
-                            getInstance(context).dictionaryDao().insertVocabulary((Dictionary("hej", "hi")))
-                        }
-                    }
-                })
-                .build()
+//        private fun buildDatabase(context: Context) =
+//            Room.databaseBuilder(context.applicationContext, DictionaryDatabase::class.java, DATABASE_NAME)
+//                .addCallback(object : Callback() {
+//                    override fun onCreate(db: SupportSQLiteDatabase) {
+//                        super.onCreate(db)
+//                        ioThread {
+//                            getInstance(context).dictionaryDao().insertVocabulary((Dictionary("hej", "hi")))
+//                        }
+//                    }
+//                })
+//                .build()
 
-        private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
-
-        fun ioThread(f: () -> Unit) {
-            IO_EXECUTOR.execute(f)
-        }
+//        private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
+//
+//        fun ioThread(f: () -> Unit) {
+//            IO_EXECUTOR.execute(f)
+//        }
             fun getDatabase(
                 context: Context,
                 scope: CoroutineScope

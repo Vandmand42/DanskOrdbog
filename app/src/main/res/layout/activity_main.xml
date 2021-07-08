@@ -10,54 +10,66 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:fitsSystemWindows="true"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/recyclerview_item"
-            android:padding="@dimen/big_padding"
-            android:paddingBottom="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview1"
+                android:fitsSystemWindows="true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:listitem="@layout/recyclerview_item"
+                android:padding="@dimen/small_padding"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview2"
+                android:fitsSystemWindows="true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:listitem="@layout/recyclerview_item"
+                android:padding="@dimen/small_padding"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+    </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:contentDescription="@string/add_word"
             android:src="@drawable/ic_round_add_24"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="60dp"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_backup"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/btn_backup"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:contentDescription="@string/add_word"-->
+<!--            android:src="@drawable/ic_baseline_archive_24"-->
+<!--            android:layout_marginEnd="100dp"-->
+<!--            android:layout_marginBottom="60dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"/>-->
 
-            android:contentDescription="@string/add_word"
-            android:src="@drawable/ic_baseline_archive_24"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="60dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-
-    <!--    <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="HEY THIS IS MY FIRST APP!"-->
-    <!--            android:textSize="30sp"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--            app:layout_constraintRight_toRightOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.432"-->
-    <!--    />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
 

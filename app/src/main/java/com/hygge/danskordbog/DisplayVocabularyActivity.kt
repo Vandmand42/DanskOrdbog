@@ -31,7 +31,7 @@ class DisplayVocabularyActivity : AppCompatActivity() {
                 val englishWord = editEnglishWordView.text.toString()
 
                 replyIntent.putExtra(EXTRA_REPLY, danishWord)
-                replyIntent.putExtra(Super_Reply, englishWord)
+                replyIntent.putExtra(SUPER_REPLY, englishWord)
                 setResult(Activity.RESULT_OK, replyIntent)
 
             }
@@ -41,6 +41,6 @@ class DisplayVocabularyActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
-        const val Super_Reply = "what"
+        const val SUPER_REPLY = "what"
     }
 }
