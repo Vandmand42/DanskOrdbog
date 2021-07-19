@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="buttonLabel">#FFFFFF</color>
     <color name="colorPrimary">#FFFFFF</color>
+    <color name="light_blue">#728aa8</color>
 </resources>
