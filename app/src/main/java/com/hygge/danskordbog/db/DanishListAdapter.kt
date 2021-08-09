@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hygge.danskordbog.R
 
-class DictionaryListAdapter : ListAdapter<Dictionary, DictionaryListAdapter.WordViewHolder>(WordsComparator()) {
+class DanishListAdapter : ListAdapter<Dictionary, DanishListAdapter.WordViewHolder>(WordsComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
         return WordViewHolder.create(parent)
@@ -18,17 +18,14 @@ class DictionaryListAdapter : ListAdapter<Dictionary, DictionaryListAdapter.Word
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current.danish)
-
     }
 
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val danishWordView: TextView = itemView.findViewById(R.id.textView)
-//        private val englishWordView: TextView = itemView.findViewById(R.id.textView)
 
         fun bind(text: String?) {
             danishWordView.text = text
-//            englishWordView.text = text
         }
 
         companion object {

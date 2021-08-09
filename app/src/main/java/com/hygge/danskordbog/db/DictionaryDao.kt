@@ -18,9 +18,9 @@ interface DictionaryDao {
     @Query("SELECT * FROM dictionary_table WHERE vocab_id == danish")
     fun getVocabulary(): Flow<Dictionary>
 
-    @Query("SELECT * FROM dictionary_table ORDER BY danish ASC")
-    fun getDanish(): Flow<List<Dictionary>>
+    @Query("SELECT * FROM dictionary_table ORDER BY danish COLLATE NOCASE ASC")
+    fun getDanish(): Flow<MutableList<Dictionary>>
 
-    @Query("SELECT * FROM dictionary_table ORDER BY english ASC")
-    fun getEnglish(): Flow<List<Dictionary>>
+    @Query("SELECT * FROM dictionary_table GROUP BY english ORDER BY danish COLLATE NOCASE ASC")
+    fun getEnglish(): Flow<MutableList<Dictionary>>
 }

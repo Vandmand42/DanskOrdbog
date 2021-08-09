@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView1 = findViewById<RecyclerView>(R.id.recyclerview1)
         val recyclerView2 = findViewById<RecyclerView>(R.id.recyclerview2)
-        val adapter1 = DictionaryListAdapter()
-        val adapter2 = DictionaryListAdapter()
+        val adapter1 = DanishListAdapter()
+        val adapter2 = EnglishListAdapter()
         recyclerView1.adapter = adapter1
         recyclerView1.layoutManager = LinearLayoutManager(this)
 
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             words?.let { adapter1.submitList(it) }
         }
 
-        wordViewModel.danishWord.observe(this) { words ->
+        wordViewModel.englishWord.observe(this) { words ->
             // Update the cached copy of the words in the adapter.
             words?.let { adapter2.submitList(it) }
         }
