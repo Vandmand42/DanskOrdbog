@@ -23,4 +23,16 @@ interface DictionaryDao {
 
     @Query("SELECT * FROM dictionary_table GROUP BY english ORDER BY danish COLLATE NOCASE ASC")
     fun getEnglish(): Flow<MutableList<Dictionary>>
+
+//    @Query("SELECT * FROM dictionary_table WHERE danish LIKE 'A%' ORDER BY danish COLLATE NOCASE ASC")
+//    fun getDanishA(): Flow<MutableList<Dictionary>>
+//
+//    @Query("SELECT * FROM dictionary_table WHERE danish LIKE 'A%' GROUP BY english ORDER BY danish COLLATE NOCASE ASC")
+//    fun getEnglishA(): Flow<MutableList<Dictionary>>
+//
+//    @Query("SELECT * FROM dictionary_table WHERE danish LIKE 'B%' ORDER BY danish COLLATE NOCASE ASC")
+//    fun getDanishB(): Flow<MutableList<Dictionary>>
+//
+//    @Query("SELECT * FROM dictionary_table WHERE danish LIKE 'B%' GROUP BY english ORDER BY danish COLLATE NOCASE ASC")
+//    fun getEnglishB(): Flow<MutableList<Dictionary>>
 }

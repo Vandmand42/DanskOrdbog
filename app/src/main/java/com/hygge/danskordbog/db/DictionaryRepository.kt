@@ -21,8 +21,6 @@ class DictionaryRepository(private val dictionaryDao: DictionaryDao) {
         dictionaryDao.insertVocabulary(dictionary)
     }
 
-
-
     @WorkerThread
     suspend fun updateVocabulary(danish: Dictionary) {
         dictionaryDao.updateVocabulary(danish)

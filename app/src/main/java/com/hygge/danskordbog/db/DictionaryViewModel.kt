@@ -9,10 +9,8 @@ class DictionaryViewModel(private val repository: DictionaryRepository) : ViewMo
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val danishWord: LiveData<MutableList<Dictionary>> = repository.danishWord.asLiveData()
-
-    val englishWord: LiveData<MutableList<Dictionary>> = repository.englishWord.asLiveData()
-//    val allDanishWord: LiveData<List<String>> = repository.allDanishWord.asLiveData()
+    var danishWord: LiveData<MutableList<Dictionary>> = repository.danishWord.asLiveData()
+    var englishWord: LiveData<MutableList<Dictionary>> = repository.englishWord.asLiveData()
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way

@@ -33,7 +33,6 @@ class DisplayVocabularyActivity : AppCompatActivity() {
                 replyIntent.putExtra(EXTRA_REPLY, danishWord)
                 replyIntent.putExtra(SUPER_REPLY, englishWord)
                 setResult(Activity.RESULT_OK, replyIntent)
-
             }
             finish()
         }

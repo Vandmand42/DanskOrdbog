@@ -72,8 +72,6 @@ class MainActivity : AppCompatActivity() {
             var firstWord = intentData?.getStringExtra(DisplayVocabularyActivity.EXTRA_REPLY)
             var secondWord = intentData?.getStringExtra(DisplayVocabularyActivity.SUPER_REPLY)
 
-
-
             if (firstWord != null && secondWord != null) {
 
             val word = Dictionary(firstWord, secondWord)
